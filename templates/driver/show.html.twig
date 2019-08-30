@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Driver{% endblock %}
+
+{% block body %}
+    <h1>Driver</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ driver.id }}</td>
+            </tr>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ driver.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ driver.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Phone_number</th>
+                <td>{{ driver.phoneNumber }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <a href="{{ path('driver_show', {'id': driver.id}) }}">show</a>
+        <a href="{{ path('driver_edit', {'id': driver.id}) }}">edit</a>
+        <form method="post" action="{{ path('driver_delete', {id : driver.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ driver.id) }}">
+            <button class="btn"><a><i class="fa fa-trash"></i></a></button>
+        </form>
+    </div>
+
+    <a href="{{ path('driver_index') }}">back to list</a>
+
+
+
+{% endblock %}

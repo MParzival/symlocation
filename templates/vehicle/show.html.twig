@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vehicle{% endblock %}
+
+{% block body %}
+    <h1>Vehicle</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ vehicle.id }}</td>
+            </tr>
+            <tr>
+                <th>Immatriculation</th>
+                <td>{{ vehicle.immatriculation }}</td>
+            </tr>
+            <tr>
+                <th>Brand</th>
+                <td>{{ vehicle.brand }}</td>
+            </tr>
+            <tr>
+                <th>Model</th>
+                <td>{{ vehicle.model }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <a href="{{ path('vehicle_show', {'id': vehicle.id}) }}">show</a>
+        <a href="{{ path('vehicle_edit', {'id': vehicle.id}) }}">edit</a>
+        <form method="post" action="{{ path('vehicle_delete', {id : vehicle.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ vehicle.id) }}">
+            <button class="btn"><a><i class="fa fa-trash"></i></a></button>
+        </form>
+    </div>
+
+
+    <a href="{{ path('vehicle_index') }}">back to list</a>
+
+
+
+
+{% endblock %}

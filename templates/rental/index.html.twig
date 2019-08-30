@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RentalController!{% endblock %}
+
+{% block body %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom et prenom du conducteur</th>
+            <th>Marque et modèle du vehicule</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for rental in rentals %}
+            <tr>
+                <td>{{ rental.id }}</td>
+                <td><a href="{{ path('driver_show', {id : rental.conducteur.id}) }}">{{ rental.conducteur.firstname }} {{ rental.conducteur.lastname }}</a></td>
+                <td><a href="{{ path('vehicle_show', {id : rental.vehicule.id}) }}">{{ rental.vehicule.model }} {{ rental.vehicule.brand }} </td>
+                <td>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('rental_new') }}" class="btn btn-primary">Créer une location</a>
+{% endblock %}
